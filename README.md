@@ -1,3 +1,8 @@
+My actual cleaned up code is in the WAF_Project folder, while my notebooks are in the notebooks folder and are more experimental then actual code
+
+
+
+
 THIS README IS JUST MY THOUGHT AND DOES NOT HAVE ANY USE
 
 data preprocessing steps that I want to work on 
