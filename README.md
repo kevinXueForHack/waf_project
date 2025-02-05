@@ -1,3 +1,5 @@
+THIS README IS JUST MY THOUGHT AND DOES NOT HAVE ANY USE
+
 data preprocessing steps that I want to work on 
 turning all the data into a specific format
 
