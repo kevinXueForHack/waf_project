@@ -1,0 +1,46 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import MinMaxScaler
+
+
+loan_df = pd.read_csv('data/processed_loan_data.csv')
+
+loan_df['APPROVAL_DATE'] = pd.to_datetime(loan_df['APPROVAL_DATE'], errors='coerce')
+loan_df['DEFAULT_DATE'] = pd.to_datetime(loan_df['DEFAULT_DATE'], errors='coerce')
+loan_df['APPROVAL_YEAR'] = loan_df['APPROVAL_DATE'].dt.year
+loan_df['DEFAULT_YEAR'] = loan_df['DEFAULT_DATE'].dt.year
+loan_df = loan_df.dropna(subset=['APPROVAL_YEAR'])
+
+
+default_counts = loan_df.groupby('DEFAULT_YEAR').size()
+indicators = ['TREASURY_YIELD', 'CPI_INDEX', 'GDP', 'MORTGAGE_30_US_FIXED', 'UNRATE']
+indicator_means = loan_df.groupby('APPROVAL_YEAR')[indicators].mean()
+
+scaler = MinMaxScaler()
+indicator_means_normalized = pd.DataFrame(
+    scaler.fit_transform(indicator_means),
+    columns=indicators,
+    index=indicator_means.index
+)
+fig, ax1 = plt.subplots(figsize=(12, 8))
+
+# Plot each normalized indicator
+colors = ['tab:blue', 'tab:orange', 'tab:green', 'tab:red', 'tab:purple']
+for indicator, color in zip(indicator_means_normalized.columns, colors):
+    ax1.plot(indicator_means_normalized.index, indicator_means_normalized[indicator], label=indicator, color=color)
+
+# Set labels and title for the first axis
+ax1.set_xlabel('Approval Year')
+ax1.set_ylabel('Normalized Indicators')
+ax1.set_title('Normalized Economic Indicators and Loan Defaults Over Time')
+ax1.legend(loc='upper left')
+ax1.grid(True)
+
+# Create a second y-axis for default counts
+ax2 = ax1.twinx()
+ax2.plot(default_counts.index, default_counts, label='Default Count', color='tab:brown', linestyle='--')
+ax2.set_ylabel('Number of Defaults')
+ax2.legend(loc='upper right')
+
+# Display the plot
+plt.show()

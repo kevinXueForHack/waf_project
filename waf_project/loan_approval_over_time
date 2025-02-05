@@ -1,0 +1,33 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+loan_df = pd.read_csv('data/processed_loan_data.csv')
+
+loan_df['APPROVAL_DATE'] = pd.to_datetime(loan_df['APPROVAL_DATE'], errors='coerce')
+
+# Extract year from APPROVAL_DATE
+loan_df['APPROVAL_YEAR'] = loan_df['APPROVAL_DATE'].dt.year
+
+# Drop rows with missing APPROVAL_YEAR
+df = loan_df.dropna(subset=['APPROVAL_YEAR'])
+
+category = 'STATE'  # Change to 'INDUSTRY_ID' or 'LOAN_STATUS' as needed
+grouped = df.groupby(['APPROVAL_YEAR', category]).size().reset_index(name='Loan_Count')
+
+# Set the plot size
+plt.figure(figsize=(15, 20))
+
+# Create the line plot
+sns.lineplot(data=grouped, x='APPROVAL_YEAR', y='Loan_Count', hue=category, marker='o')
+
+# Set plot title and labels
+plt.title(f'Loan Approvals Over Time by {category}')
+plt.xlabel('Approval Year')
+plt.ylabel('Number of Loans')
+plt.legend(title=category, bbox_to_anchor=(1.05, 1), loc='upper left')
+
+# Display the plot
+plt.tight_layout()
+plt.show()
+
