@@ -1,7 +1,7 @@
+I contributed 100% of the code in this project I submitted for a technical. When it comes to ChatGPT, I used it for mainly helping me understand ML/Pandas documentation and cleaning up my code and adding docstrings/useful comments to my messy final code. 
+
+
 My actual cleaned up code is in the WAF_Project folder, while my notebooks are in the notebooks folder and are more experimental then actual code
-
-
-
 
 THIS README IS JUST MY THOUGHT AND DOES NOT HAVE ANY USE
 
@@ -33,80 +33,13 @@ column dimensionality reduction
 4. balance can go
 5. cities gotta go NGL just use zip code analysis instead
 
-
-
-
-
-
-
-
-
-
-5. there exists a lot of tables with no industry code near the early dates
-
-
-
-6. there's a couple missing dates as well
-
-
-
 split the data into two sections:
 1. paid off loans
 2. non paid off loans
 
-EDA: Does the data have any interesting quirks or features? Describe any important
-preprocessing/wrangling steps you took to clean the data.
+building multi-regression
+building logistic regrssion
+builidng k-clustering
 
 
-do a linear regression for charge_off_amount
-
-
-build 
-
-Regression: What are the most predictive factors in determining the amount charged off? Brainstorm or
-build a predictive regression model for the `CHARGE_OFF_AMOUNT` column. Explain how you
-evaluate the performance of the model.
-
-We want to multivaraite regression because it allows us to judge off more than one variabel
-However we struggle with multicollinearity.
-Thus, OLS sucks with multicollinearity, and PCR is bad at intrepretability
-A good enough compromise is
-
-
-Independent variables are presumably
-
-1. Term
-2. Employee Count
-3. is_urban
-4. is_low_doc
-5. disbursement amount
-6. percentage exposure
-7. UMCSENT_INDEX
-8. INDPRO_INDEX
-9. FEDFUNDS_RATE
-
-Classification: What are the most predictive factors in determining if a loan will default? On the flip side,
-what are the most predictive factors in determining if a loan will be paid back in full? Brainstorm or build
-a predictive classification model for the dataset.
-
-do a logistic regression/classification model for paid-off/loan status dataset
-
-
-Clustering: If you had to decide on 3-5 “types” or “groups” of loan applications, what would they be?
-Describe your thought process in picking these groups, as well as models you build to implement this. If
-you choose not to write a clustering model, please be prepared to defend your assumptions using other
-data analysis techniques. (Note: this question is intentionally ambiguous – we encourage you to come up
-with your own interpretation!)
-
-So What?: What are your final recommendations for a lender trying to determine if a loan should be
-approved or not? What are the insights and implications? Incorporate the analysis from the models used in
-previous questions to recommend steps or action items to better predict loan defaults beyond using the
-model itself. (Note: Once again, this question is open-ended and does not have one right answer. We’re
-looking for creativity in how you might recommend the company to proceed!)
-
-
-
-vibes:
-1. build an OLS model for charge off amount
-2. build a logistic/classification model for defaulting/PIF
 3. cluster applications based on a combo of loan_size, market_conditions, and tern/exposre
